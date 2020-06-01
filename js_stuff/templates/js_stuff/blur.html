@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        image Guess
+    </title>
+    <style>
+    body {
+        margin: 20px;
+    }
+
+    img {
+        margin: 20px;
+    }
+    </style>
+    <script>
+    window.onload = init;
+
+    function init() {
+        var images = document.getElementsByTagName("img");
+        for (var i = 0; i < images.length; i++) {
+            images[i].onmouseover = showAnswer;
+            images[i].onmouseout = reblur;
+        }
+    };
+
+    function showAnswer(eventObj) {
+        var image = eventObj.target;
+        var name = image.id;
+        name = "/static/js_stuff/blur/" + name + ".jpg";
+        image.src = name;
+
+    }
+
+    function reblur(eventObj) {
+        var image = eventObj.target
+        var name = image.id;
+        // hate to hardcode this, has to be a better way
+        name = "/static/js_stuff/blur/" + name + "blur.jpg";
+        image.src = name
+    }
+    </script>
+</head>
+
+<body>
+    <p><a href="{% url 'js_stuff:index' %}">НАЗАД</a></p>
+    <img id="zero" src="{% static 'js_stuff/blur/zeroblur.jpg' %}">
+    <img id="one" src="{% static 'js_stuff/blur/oneblur.jpg' %}">
+    <img id="two" src="{% static 'js_stuff/blur/twoblur.jpg' %}">
+    <img id="three" src="{% static 'js_stuff/blur/threeblur.jpg' %}">
+    <img id="four" src="{% static 'js_stuff/blur/fourblur.jpg' %}">
+    <img id="five" src="{% static 'js_stuff/blur/fiveblur.jpg' %}">
+</body>
+
+</html>
